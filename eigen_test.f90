@@ -85,5 +85,5 @@ program eigen_test
   print *,""
    
   ! notice that the arguments of subroutines zgeev and dgeev are different
-
+  ! add a test file for a complex matrix as well
 end program eigen_test
