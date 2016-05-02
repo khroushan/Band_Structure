@@ -84,5 +84,6 @@ program eigen_test
   print *,""
   print *,""
    
+  ! notice that the arguments of subroutines zgeev and dgeev are different
 
 end program eigen_test
