@@ -1,0 +1,40 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+%%== Packages ==%%
+
+%%== New command ==%%
+\newcommand{\hl}{\mathcal{H}}
+\newcommand{\rg}{\rangle}
+\newcommand{\leg}{\langle}
+\newcommand{\ep}{\epsilon}
+%===========================
+\author{Amin Ahmadi}
+\date{16 May 2016}
+\title{Band structure}
+\begin{document}
+\section{Square Lattice}
+A 1D chain lattice in tight-binding approximation has the
+Hamiltonian of the form
+\begin{equation}
+  \hl = \sum_{n=-\infty}^{\infty} \epsilon_0 |n\rg\leg n|
+  -t\sum_{n=-\infty}^\infty (|n\rg\leg n| + |n+1\rg\leg n|)
+\end{equation}
+where $t$ is the hopping amplitude and $\ep_0$ is the
+on-site energy. The matrix representation of the Hamiltonian
+reads
+\begin{equation}
+  \hl =
+  \begin{pmatrix}
+    \ep_0 & -t & 0 & \ldots 0 \\
+    -t & \ep_0 & -t & 0 & \ldots \\
+    \vdots
+  \end{pmatrix}
+\end{equation}
+to compute the dispertion relation $E=E(k)$ one can use the
+fact that the physical properties of the lattice is
+invariant under translational transformation, means
+\begin{equation}
+  [\hl,\tau(a)] = 0
+\end{equation}
+where $a$ is the lattice distance.
+\end{document}
