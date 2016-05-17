@@ -161,35 +161,37 @@ contains
     !- Initializing 
     hm = (0.d0,0.d0)
     mlat = int((n_sites - 2)/4)
-    print *, "mlat = ", mlat, "n_sites = " , n_sites
     !==========================
     !- Constructing Hamiltonian
     !==========================
-    do i = 0, mlat - 4, 4
-       hm(i+1,i+2) = -t*(1.d0,0.d0)
-       hm(i+2,i+1) = conjg(hm(i+1,i+2))
+    do i = 0, mlat-1 
+       j = i*4
+       hm(j+1,j+2) = -t*(1.d0,0.d0)
+       hm(j+2,j+1) = conjg(hm(j+1,j+2))
        
-       hm(i+1,i+3) = -t*(1.d0,0.d0)
-       hm(i+3,i+1) = conjg(hm(i+1,i+3))
+       hm(j+1,j+3) = -t*(1.d0,0.d0)
+       hm(j+3,j+1) = conjg(hm(j+1,j+3))
        
-       hm(i+2,i+4) = -t*(1.d0,0.d0)
-       hm(i+4,i+2) = conjg(hm(i+2,i+4))
-       
-       hm(i+3,i+5) = -t*(1.d0,0.d0)
-       hm(i+5,i+3) = conjg(hm(i+3,i+5))
-       
-       hm(i+4,i+6) = -t*(1.d0,0.d0)
-       hm(i+6,i+4) = conjg(hm(i+4,i+6))
-       
-       hm(i+5,i+6) = -t*(1.d0,0.d0)
-       hm(i+6,i+5) = conjg(hm(i+5,i+6))
-       
+       hm(j+2,j+4) = -t*(1.d0,0.d0)
+       hm(j+4,j+2) = conjg(hm(j+2,j+4))
+       !===================================
+       if (i .ne. 0) then
+          hm(j+3,j+5) = -t*(1.d0,0.d0)
+          hm(j+5,j+3) = conjg(hm(j+3,j+5))
+          
+          hm(j+4,j+6) = -t*(1.d0,0.d0)
+          hm(j+6,j+4) = conjg(hm(j+4,j+6))
+       end if
+       if (i .eq. mlat-1) then
+          hm(j+5,j+6) = -t*(1.d0,0.d0)
+          hm(j+6,j+5) = conjg(hm(j+5,j+6))
+       end if
     end do
     !=================
     !- Constructing UR
     !=================
     
-    do i = 4, mlat, 4
+    do i = 4, n_sites, 4
        hm(i,i-1) = hm(i,i-1) - t*exp(phi*(0.d0,1.d0))
        hm(i-1,i) = conjg(hm(i,i-1))
     end do
