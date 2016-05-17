@@ -109,21 +109,26 @@ contains
     !==========================
     !- Constructing Hamiltonian
     !==========================
-    do i = 1, mlat-1
+    do i = 1, mlat-1                       ! vertical connection
        hm(i,i+1) = -t*(1.d0,0.d0)
        hm(i+1,i) = conjg(hm(i,i+1))
        j = i + mlat
        hm(j,j+1) = -t*(1.d0,0.d0)
        hm(j+1,j) = conjg(hm(j,j+1))
     end do 
+
+    do i = 1, mlat                         !- horizontal connection
+       hm(i,i+mlat) = -t*(1.d0,0.d0)
+       hm(i+mlat,i) = conjg(hm(i,i+mlat))
+    end do
     !  no PBC
     !===============================================
     !- Constructing translational part of Hamiltonian
     !===============================================
 
     do i = 1, mlat
-       hm(i,i+mlat) = -t*exp(phi*(0.d0,1.d0))
-       hm(i+mlat,i) = conjg( hm(i,i+mlat) )
+       hm(i,i+mlat) = hm(i,i+mlat)  - t*exp(phi*(0.d0,1.d0))
+       hm(i+mlat,i) = conjg(hm(i,i+mlat))
     end do
   end subroutine sqr_hu
 end module hamiltonian
@@ -134,7 +139,7 @@ program sqr_band
   use zeigens
   implicit  none
 
-  integer, parameter :: mlat = 2
+  integer, parameter :: mlat = 4
   real(kind=dp) :: phi = 1.d0
   complex(kind=dp), dimension(2*mlat,2*mlat) :: hm
   integer :: i, ik, num = 100!,j
@@ -149,6 +154,6 @@ program sqr_band
      ! do i = 1 , mlat
      !    print fmt, (real(hm(i,j)), j=1,mlat)
      ! end do
-     print fmt, phi,real(hm(1,3)),  (real(eigns(i)), i = 1, 2*mlat)
+     print fmt, phi,  (real(eigns(i)), i = 1, 2*mlat)
   end do
 end program sqr_band

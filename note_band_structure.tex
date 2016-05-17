@@ -17,7 +17,7 @@ A 1D chain lattice in tight-binding approximation has the
 Hamiltonian of the form
 \begin{equation}
   \hl = \sum_{n=-\infty}^{\infty} \epsilon_0 |n\rg\leg n|
-  -t\sum_{n=-\infty}^\infty (|n\rg\leg n| + |n+1\rg\leg n|)
+  -t\sum_{n=-\infty}^\infty (|n\rg\leg n+1| + |n+1\rg\leg n|)
 \end{equation}
 where $t$ is the hopping amplitude and $\ep_0$ is the
 on-site energy. The matrix representation of the Hamiltonian
@@ -36,5 +36,25 @@ invariant under translational transformation, means
 \begin{equation}
   [\hl,\tau(a)] = 0
 \end{equation}
-where $a$ is the lattice distance.
+where $a$ is the lattice distance. At this point we are
+looking for an approach to transform the eigenvalue problem
+of $\infty\times\infty$ Hamiltonian to $m\times m$ problem
+where $m$ is the dimension of a single unit cell.
+
+Assume each unit cell is seperated with distance $a$ and has
+an internal staructure which can be described with the
+Hamiltonian matrix $h$. The hopping matrix is $\tau$. In
+this manner the total Hamiltonian has the form of
+\begin{equation}
+  \hl = \sum_{n=-\infty}^{\infty} h |n\rg\leg n|
+  -\sum_{n=-\infty}^\infty (\tau|n\rg\leg n+1| + \tau^\dag|n+1\rg\leg n|)
+\end{equation} 
+where $h$ and $u$ matrices are $m\time m$ dimensional which
+is the number of sites in the unit cell. The band structure
+problem which is the eigen-energies of whole lattice can be
+reduced to the eigenvalue problem of unit cell using the
+fact 
+\begin{equation}
+  \hat{u}\phi_{n+1} = \hat{u} e^{ika} \phi_n 
+\end{equation}
 \end{document}
